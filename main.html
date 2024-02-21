@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Purchase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .option {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .option h2 {
+            margin-top: 0;
+        }
+        .option p {
+            margin-bottom: 10px;
+        }
+        .option button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .option button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="option">
+            <h2>Basic Access</h2>
+            <p>- 50GB Onlyfans Content</p>
+            <p>$9.99 per month</p>
+            <button onclick="purchase('basic')">Purchase Basic</button>
+        </div>
+        <div class="option">
+            <h2>Premium Access</h2>
+            <p>- 250GB Onlyfans Content</p>
+            <p>$19.99 per month</p>
+            <button onclick="purchase('premium')">Purchase Premium</button>
+        </div>
+        <div class="option">
+            <h2>Pro Access</h2>
+            <p>- Access to all content we have</p>
+            <p>- 500GB+ Onlyfans content</p>
+            <p>- 200GB+ Jailbait Videos & Pictures</p>
+            <p>$29.99 per month</p>
+            <button onclick="purchase('pro')">Purchase Pro</button>
+        </div>
+    </div>
+
+    <script>
+        function purchase(level) {
+            // Generate a random key
+            var randomKey = generateRandomKey();
+
+            // Print the random key and payment instructions
+            var paymentMethods = "Payment methods:\n";
+            paymentMethods += "add the given key to the description when you send money if you're sending Zelle or Cash App";
+            paymentMethods += "Zelle - bossguy15@yahoo.com\n";
+            paymentMethods += "Apple Pay - bossguy15@yahoo.com\n";
+            paymentMethods += "Cash App - $luhyanny\n";
+            paymentMethods += "Crypto - Please contact us for crypto payment details.";
+
+            alert('Your purchase for ' + level + ' access is now on hold please contact duxkdad on discord and send your key, Your key is: ' + randomKey + '\n\n' + paymentMethods);
+        }
+
+        function generateRandomKey() {
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var length = 10;
+            var randomKey = '';
+            for (var i = 0; i < length; i++) {
+                randomKey += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return randomKey;
+        }
+    </script>
+</body>
+</html>
